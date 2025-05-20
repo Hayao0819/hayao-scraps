@@ -1,4 +1,4 @@
-module github.com/Hayao0819/Hayao-Tools/slog-sample
+module github.com/Hayao0819/hayao-scraps/slog-sample
 
 go 1.23.0
 
