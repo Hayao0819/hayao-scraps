@@ -64,6 +64,10 @@ var clientCmd = cobra.Command{
 		}
 		defer resp.Body.Close()
 
+		if resp.StatusCode == http.StatusRequestEntityTooLarge {
+			return fmt.Errorf("file size too large: %v", resp.Status)
+		}
+
 		if resp.StatusCode != http.StatusOK {
 			return fmt.Errorf("server returned non-OK status: %v", resp.Status)
 		}

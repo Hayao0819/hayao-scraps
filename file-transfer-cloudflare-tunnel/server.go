@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"net/http"
 	"os"
 	"path/filepath"
 
@@ -18,6 +19,11 @@ var serverCmd = cobra.Command{
 
 		e := gin.Default()
 		e.PUT("/upload", func(c *gin.Context) {
+			err := c.Request.ParseMultipartForm(256_000_000) // 256MB
+			if err != nil {
+				c.JSON(http.StatusRequestEntityTooLarge, gin.H{"error": "file size too large"})
+				return
+			}
 
 			tmpdir, err := os.MkdirTemp("", "file-transfer")
 			if err != nil {
