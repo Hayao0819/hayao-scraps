@@ -50,7 +50,7 @@ var clientCmd = cobra.Command{
 			return fmt.Errorf("failed to close writer: %v", err)
 		}
 
-		serverAddress := "http://test.hayao0819.com/upload"
+		serverAddress := "https://test.hayao0819.com/upload"
 		req, err := http.NewRequest("PUT", serverAddress, body)
 		if err != nil {
 			return fmt.Errorf("failed to create request: %v", err)
